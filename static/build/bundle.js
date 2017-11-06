@@ -923,42 +923,18 @@ module.exports = Cancel;
 "use strict";
 
 
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
 var axios = __webpack_require__(9); //axios 輕量化的 request 套件 (方便快速載入)
 
 var getApiUrl = function getApiUrl() {
   return window.location.protocol + '//' + window.location.host;
 };
 
-var getHistory = function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-    var url, result;
-    return regeneratorRuntime.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            url = getApiUrl() + 'api/history/';
-            _context.next = 3;
-            return axios.get(url);
-
-          case 3:
-            result = _context.sent;
-
-            console.log(result);
-
-          case 5:
-          case 'end':
-            return _context.stop();
-        }
-      }
-    }, _callee, undefined);
-  }));
-
-  return function getHistory() {
-    return _ref.apply(this, arguments);
-  };
-}();
+var getHistory = function getHistory() {
+  var url = getApiUrl() + '/api/history/';
+  axios.get(url).then(function (result) {
+    console.log(result.data);
+  });
+};
 
 getHistory();
 
