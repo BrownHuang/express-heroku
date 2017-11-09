@@ -44,8 +44,8 @@ class History extends React.Component {
     console.log('[render]',this.state);
 
     return this.state.data.map((item) => {
-      const { formattedAddress, lat, lng, queryAddress } = item;
-      return <li> {queryAddress}, {lat}, {lng} </li>
+      const { formatted_Address, lat, lng, queryAddress } = item;
+      return <li> {queryAddress}, {lat}, {lng},{formatted_Address} </li>
     }) 
 
   }

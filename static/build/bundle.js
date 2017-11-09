@@ -10522,7 +10522,7 @@ var History = function (_React$Component) {
       console.log('[render]', this.state);
 
       return this.state.data.map(function (item) {
-        var formattedAddress = item.formattedAddress,
+        var formatted_Address = item.formatted_Address,
             lat = item.lat,
             lng = item.lng,
             queryAddress = item.queryAddress;
@@ -10536,6 +10536,8 @@ var History = function (_React$Component) {
           lat,
           ', ',
           lng,
+          ',',
+          formatted_Address,
           ' '
         );
       });
