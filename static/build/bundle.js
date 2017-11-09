@@ -10477,7 +10477,7 @@ var HistoryItem = function (_React$Component) {
 
       return React.createElement(
         'li',
-        null,
+        { key: this.props.index },
         ' ',
         React.createElement(
           'b',
@@ -10564,8 +10564,8 @@ var History = function (_React$Component2) {
 
       console.log('[render]', this.state);
 
-      return this.state.data.map(function (item) {
-        return React.createElement(HistoryItem, { item: item });
+      return this.state.data.map(function (item, index) {
+        return React.createElement(HistoryItem, { item: item, index: index });
       });
     }
   }]);
