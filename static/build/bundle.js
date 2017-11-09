@@ -10573,10 +10573,73 @@ var History = function (_React$Component2) {
   return History;
 }(React.Component);
 
+var App = function (_React$Component3) {
+  _inherits(App, _React$Component3);
+
+  function App() {
+    _classCallCheck(this, App);
+
+    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+  }
+
+  _createClass(App, [{
+    key: 'search',
+    value: function () {
+      var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+        var url, _ref4, data;
+
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                url = getApiUrl() + '/api/search?address=總統府';
+                _context2.next = 3;
+                return axios.get(url);
+
+              case 3:
+                _ref4 = _context2.sent;
+                data = _ref4.data;
+
+                console.log(data);
+
+              case 6:
+              case 'end':
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function search() {
+        return _ref3.apply(this, arguments);
+      }
+
+      return search;
+    }()
+  }, {
+    key: 'render',
+    value: function render() {
+      return React.createElement(
+        'div',
+        null,
+        React.createElement('input', { type: 'text' }),
+        React.createElement(
+          'button',
+          { onClick: this.search },
+          ' search '
+        ),
+        React.createElement(History, null)
+      );
+    }
+  }]);
+
+  return App;
+}(React.Component);
+
 // 將 hello 元件載入 root element 裡頭
 
 
-ReactDOM.render(React.createElement(History, null), document.getElementById('root'));
+ReactDOM.render(React.createElement(App, null), document.getElementById('root'));
 
 /***/ }),
 /* 337 */
