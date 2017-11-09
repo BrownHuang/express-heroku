@@ -10432,13 +10432,13 @@ module.exports = function (regExp, replace) {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 var axios = __webpack_require__(337); //axios 輕量化的 request 套件 (方便快速載入)
 var React = __webpack_require__(361);
@@ -10457,67 +10457,98 @@ const getHistory = () => {
 }
 */
 
-var getHistory = function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-    var url, _ref2, data;
+var History = function (_React$Component) {
+  _inherits(History, _React$Component);
 
-    return regeneratorRuntime.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            url = getApiUrl() + '/api/history/';
-            _context.next = 3;
-            return axios.get(url);
+  //生命週期 - 設定初始化狀態
+  function History(props) {
+    _classCallCheck(this, History);
 
-          case 3:
-            _ref2 = _context.sent;
-            data = _ref2.data;
+    var _this = _possibleConstructorReturn(this, (History.__proto__ || Object.getPrototypeOf(History)).call(this, props));
 
-            console.log('data:', data);
-
-          case 6:
-          case 'end':
-            return _context.stop();
-        }
-      }
-    }, _callee, undefined);
-  }));
-
-  return function getHistory() {
-    return _ref.apply(this, arguments);
-  };
-}();
-
-getHistory();
-
-var Hello = function (_React$Component) {
-  _inherits(Hello, _React$Component);
-
-  function Hello() {
-    _classCallCheck(this, Hello);
-
-    return _possibleConstructorReturn(this, (Hello.__proto__ || Object.getPrototypeOf(Hello)).apply(this, arguments));
+    _this.state = {
+      data: []
+    };
+    return _this;
   }
 
-  _createClass(Hello, [{
+  _createClass(History, [{
+    key: 'getHistory',
+    value: function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+        var url, _ref2, data;
+
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                url = getApiUrl() + '/api/history/';
+                _context.next = 3;
+                return axios.get(url);
+
+              case 3:
+                _ref2 = _context.sent;
+                data = _ref2.data;
+
+                //console.log('data:', data);
+                this.setState({ data: data });
+
+              case 6:
+              case 'end':
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function getHistory() {
+        return _ref.apply(this, arguments);
+      }
+
+      return getHistory;
+    }()
+
+    //生命週期 - component 掛載上去時啟動
+
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.getHistory();
+    }
+  }, {
     key: 'render',
     value: function render() {
-      return React.createElement(
-        'div',
-        null,
-        'Hello ',
-        this.props.name
-      );
+
+      console.log('[render]', this.state);
+
+      return this.state.data.map(function (item) {
+        var formattedAddress = item.formattedAddress,
+            lat = item.lat,
+            lng = item.lng,
+            queryAddress = item.queryAddress;
+
+        return React.createElement(
+          'li',
+          null,
+          ' ',
+          queryAddress,
+          ', ',
+          lat,
+          ', ',
+          lng,
+          ' '
+        );
+      });
     }
   }]);
 
-  return Hello;
+  return History;
 }(React.Component);
 
 // 將 hello 元件載入 root element 裡頭
 
 
-ReactDOM.render(React.createElement(Hello, { name: 'ggm' }), document.getElementById('root'));
+ReactDOM.render(React.createElement(History, null), document.getElementById('root'));
 
 /***/ }),
 /* 337 */

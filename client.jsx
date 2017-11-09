@@ -15,22 +15,44 @@ const getHistory = () => {
 }
 */
 
-const getHistory = async () => {
-  let url = getApiUrl() + '/api/history/';
-  let { data } = await axios.get(url);
-  console.log('data:', data)
-}
 
-getHistory();
 
-class Hello extends React.Component {
+class History extends React.Component {
+
+  //生命週期 - 設定初始化狀態
+  constructor(props){
+    super(props);
+    this.state = {
+      data:[]
+    };
+  }
+
+  async getHistory () {
+    let url = getApiUrl() + '/api/history/';
+    let { data } = await axios.get(url);
+    //console.log('data:', data);
+    this.setState({ data });
+  }
+
+  //生命週期 - component 掛載上去時啟動
+  componentDidMount(){
+    this.getHistory();
+  }
+
   render() {
-    return <div>Hello {this.props.name}</div>;
+
+    console.log('[render]',this.state);
+
+    return this.state.data.map((item) => {
+      const { formattedAddress, lat, lng, queryAddress } = item;
+      return <li> {queryAddress}, {lat}, {lng} </li>
+    }) 
+
   }
 }
 
 // 將 hello 元件載入 root element 裡頭
 ReactDOM.render(
-  <Hello name="ggm" />,
+  <History/>,
   document.getElementById('root')
 )
