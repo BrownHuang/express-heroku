@@ -16,6 +16,13 @@ const getHistory = () => {
 */
 
 
+class HistoryItem extends React.Component{
+  render(){
+    const { formatted_Address, lat, lng, queryAddress } = this.props.item;    
+    return <li> <b>{queryAddress}</b>, ({lat}, {lng}) <br /> {formatted_Address} </li>
+  }
+
+}
 
 class History extends React.Component {
 
@@ -44,8 +51,7 @@ class History extends React.Component {
     console.log('[render]',this.state);
 
     return this.state.data.map((item) => {
-      const { formatted_Address, lat, lng, queryAddress } = item;
-      return <li> {queryAddress}, {lat}, {lng},{formatted_Address} </li>
+      return <HistoryItem item = {item}/>
     }) 
 
   }

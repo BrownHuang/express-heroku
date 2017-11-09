@@ -10457,19 +10457,62 @@ const getHistory = () => {
 }
 */
 
-var History = function (_React$Component) {
-  _inherits(History, _React$Component);
+var HistoryItem = function (_React$Component) {
+  _inherits(HistoryItem, _React$Component);
+
+  function HistoryItem() {
+    _classCallCheck(this, HistoryItem);
+
+    return _possibleConstructorReturn(this, (HistoryItem.__proto__ || Object.getPrototypeOf(HistoryItem)).apply(this, arguments));
+  }
+
+  _createClass(HistoryItem, [{
+    key: 'render',
+    value: function render() {
+      var _props$item = this.props.item,
+          formatted_Address = _props$item.formatted_Address,
+          lat = _props$item.lat,
+          lng = _props$item.lng,
+          queryAddress = _props$item.queryAddress;
+
+      return React.createElement(
+        'li',
+        null,
+        ' ',
+        React.createElement(
+          'b',
+          null,
+          queryAddress
+        ),
+        ', (',
+        lat,
+        ', ',
+        lng,
+        ') ',
+        React.createElement('br', null),
+        ' ',
+        formatted_Address,
+        ' '
+      );
+    }
+  }]);
+
+  return HistoryItem;
+}(React.Component);
+
+var History = function (_React$Component2) {
+  _inherits(History, _React$Component2);
 
   //生命週期 - 設定初始化狀態
   function History(props) {
     _classCallCheck(this, History);
 
-    var _this = _possibleConstructorReturn(this, (History.__proto__ || Object.getPrototypeOf(History)).call(this, props));
+    var _this2 = _possibleConstructorReturn(this, (History.__proto__ || Object.getPrototypeOf(History)).call(this, props));
 
-    _this.state = {
+    _this2.state = {
       data: []
     };
-    return _this;
+    return _this2;
   }
 
   _createClass(History, [{
@@ -10522,24 +10565,7 @@ var History = function (_React$Component) {
       console.log('[render]', this.state);
 
       return this.state.data.map(function (item) {
-        var formatted_Address = item.formatted_Address,
-            lat = item.lat,
-            lng = item.lng,
-            queryAddress = item.queryAddress;
-
-        return React.createElement(
-          'li',
-          null,
-          ' ',
-          queryAddress,
-          ', ',
-          lat,
-          ', ',
-          lng,
-          ',',
-          formatted_Address,
-          ' '
-        );
+        return React.createElement(HistoryItem, { item: item });
       });
     }
   }]);
