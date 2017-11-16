@@ -11304,7 +11304,9 @@ var App = function (_React$Component3) {
                 _ref4 = _context2.sent;
                 data = _ref4.data;
 
-              case 6:
+                console.log(data);
+
+              case 7:
               case 'end':
                 return _context2.stop();
             }

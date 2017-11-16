@@ -68,7 +68,7 @@ class App extends React.Component{
     let input = this.state.input;
     let  url = getApiUrl() + `/api/search?address=${input}`;
     let { data } = await axios.get(url);
-    //console.log(data);
+    console.log(data);
   }
 
 
