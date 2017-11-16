@@ -68,6 +68,7 @@ class App extends React.Component{
     let input = this.state.input;
     let  url = getApiUrl() + `/api/search?address=${input}`;
     let { data } = await axios.get(url);
+    this.history.getHistory();
     console.log(data);
   }
 
@@ -78,12 +79,16 @@ class App extends React.Component{
     this.setState({input: value});
   }
 
+  setHistory(history){
+    this.history = history;
+  }
+
   render(){
     return (
       <div>
         <input type="text" onChange={this.handleChange.bind(this)}/>
         <button onClick={this.search.bind(this)}> search </button>
-        <History />
+        <History ref={this.setHistory.bind(this)}/>
       </div>
     )
   }

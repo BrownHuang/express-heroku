@@ -11304,9 +11304,10 @@ var App = function (_React$Component3) {
                 _ref4 = _context2.sent;
                 data = _ref4.data;
 
+                this.history.getHistory();
                 console.log(data);
 
-              case 7:
+              case 8:
               case 'end':
                 return _context2.stop();
             }
@@ -11328,6 +11329,11 @@ var App = function (_React$Component3) {
       this.setState({ input: value });
     }
   }, {
+    key: 'setHistory',
+    value: function setHistory(history) {
+      this.history = history;
+    }
+  }, {
     key: 'render',
     value: function render() {
       return React.createElement(
@@ -11339,7 +11345,7 @@ var App = function (_React$Component3) {
           { onClick: this.search.bind(this) },
           ' search '
         ),
-        React.createElement(History, null)
+        React.createElement(History, { ref: this.setHistory.bind(this) })
       );
     }
   }]);
