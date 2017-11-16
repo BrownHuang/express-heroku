@@ -48,7 +48,7 @@ class History extends React.Component {
 
   render() {
 
-    console.log('[render]',this.state);
+    //console.log('[render]',this.state);
 
     return this.state.data.map((item, index) => {
       return <HistoryItem item={item} index={index}/>
@@ -59,18 +59,30 @@ class History extends React.Component {
 
 class App extends React.Component{
 
+  constructor(props){
+    super(props);
+    this.state = {};
+  }
 
   async search () {
-    let  url = getApiUrl() + '/api/search?address=總統府';
+    let input = this.state.input;
+    let  url = getApiUrl() + `/api/search?address=${input}`;
     let { data } = await axios.get(url);
-    console.log(data);
+    //console.log(data);
+  }
+
+
+  handleChange(event){
+    //console.log(event.target.value);
+    let value = event.target.value;
+    this.setState({input: value});
   }
 
   render(){
     return (
       <div>
-        <input type="text"/>
-        <button onClick={this.search}> search </button>
+        <input type="text" onChange={this.handleChange.bind(this)}/>
+        <button onClick={this.search.bind(this)}> search </button>
         <History />
       </div>
     )

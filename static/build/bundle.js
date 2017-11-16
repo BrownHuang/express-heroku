@@ -11262,7 +11262,7 @@ var History = function (_React$Component2) {
     key: 'render',
     value: function render() {
 
-      console.log('[render]', this.state);
+      //console.log('[render]',this.state);
 
       return this.state.data.map(function (item, index) {
         return React.createElement(HistoryItem, { item: item, index: index });
@@ -11276,31 +11276,33 @@ var History = function (_React$Component2) {
 var App = function (_React$Component3) {
   _inherits(App, _React$Component3);
 
-  function App() {
+  function App(props) {
     _classCallCheck(this, App);
 
-    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+    var _this3 = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+
+    _this3.state = {};
+    return _this3;
   }
 
   _createClass(App, [{
     key: 'search',
     value: function () {
       var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-        var url, _ref4, data;
+        var input, url, _ref4, data;
 
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                url = getApiUrl() + '/api/search?address=總統府';
-                _context2.next = 3;
+                input = this.state.input;
+                url = getApiUrl() + ('/api/search?address=' + input);
+                _context2.next = 4;
                 return axios.get(url);
 
-              case 3:
+              case 4:
                 _ref4 = _context2.sent;
                 data = _ref4.data;
-
-                console.log(data);
 
               case 6:
               case 'end':
@@ -11317,15 +11319,22 @@ var App = function (_React$Component3) {
       return search;
     }()
   }, {
+    key: 'handleChange',
+    value: function handleChange(event) {
+      //console.log(event.target.value);
+      var value = event.target.value;
+      this.setState({ input: value });
+    }
+  }, {
     key: 'render',
     value: function render() {
       return React.createElement(
         'div',
         null,
-        React.createElement('input', { type: 'text' }),
+        React.createElement('input', { type: 'text', onChange: this.handleChange.bind(this) }),
         React.createElement(
           'button',
-          { onClick: this.search },
+          { onClick: this.search.bind(this) },
           ' search '
         ),
         React.createElement(History, null)
