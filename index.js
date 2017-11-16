@@ -20,22 +20,20 @@ MongoClient.connect(mongoURL, async function(err, db) {
     // let doc1 = { 'hello': 'doc1' };
     // let doc2 = { 'hello': 'doc2' };
     // let lotsOfDocs = [{ 'hello': 'doc3' }, { 'hello': 'doc4' }];
-  
     // collection.insert(doc1);
     // collection.insert(doc2, { w: 1 }, function (err, result) { });
     // collection.insert(lotsOfDocs, { w: 1 }, function (err, result) { });
   
-    //--讀取DB資料--//
+    //--單筆讀取DB資料--//
     //let collection = db.collection('test');
     // let cursor = collection.find({hello: 'doc1'});
-
     // let item = await cursor.nextObject();
     // console.log(item); 
     // item =  await cursor.nextObject();
     // console.log(item); 
 
+    //--讀取所有DB資料--//
     let collection = db.collection('test');
-    
     collection.find({}).toArray((err, results) => {
       console.log(results)
     });
