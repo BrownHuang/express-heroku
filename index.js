@@ -13,7 +13,10 @@ MongoClient.connect(mongoURL, async function(err, db) {
       return console.dir(err); 
     } 
 
-    let collection = db.collection('test');
+    
+
+    //--建立DB資料--//
+    //let collection = db.collection('test');
     // let doc1 = { 'hello': 'doc1' };
     // let doc2 = { 'hello': 'doc2' };
     // let lotsOfDocs = [{ 'hello': 'doc3' }, { 'hello': 'doc4' }];
@@ -22,12 +25,21 @@ MongoClient.connect(mongoURL, async function(err, db) {
     // collection.insert(doc2, { w: 1 }, function (err, result) { });
     // collection.insert(lotsOfDocs, { w: 1 }, function (err, result) { });
   
-    let cursor = collection.find({hello: 'doc1'});
+    //--讀取DB資料--//
+    //let collection = db.collection('test');
+    // let cursor = collection.find({hello: 'doc1'});
 
-    let item = await cursor.nextObject();
-    console.log(item); 
-    item =  await cursor.nextObject();
-    console.log(item); 
+    // let item = await cursor.nextObject();
+    // console.log(item); 
+    // item =  await cursor.nextObject();
+    // console.log(item); 
+
+    let collection = db.collection('test');
+    
+    collection.find({}).toArray((err, results) => {
+      console.log(results)
+    });
+
 
     mdb = db;
 });
