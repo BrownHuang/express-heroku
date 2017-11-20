@@ -65,7 +65,7 @@ app.get('/api/search', async function (req, res) {
   const address = req.query.address
   if(address){
     let result = await search(address);
-    queryHistory.push(result);
+    //queryHistory.push(result);
     historyCollection.insert(result);
     res.json(result);
   }else{
