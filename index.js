@@ -76,10 +76,21 @@ app.get('/api/search', async function (req, res) {
   }
 })
 
-app.get('/api/history', function(req, res){
-  historyCollection.find({}).toArray((error, results) =>{
-    res.json(results);
-  });
+
+app.get('/api/history', async function(req, res){
+
+  try {
+    let results = await historyCollection.find({}).toArray()
+    res.json(results)
+  } catch (error) {
+    console.trace(error)
+    res.json(error)
+  }
+
+  // historyCollection.find({}).toArray((error, results) =>{
+  //   res.json(results);
+  // });
+  
   //res.json(queryHistory);
 })
 
