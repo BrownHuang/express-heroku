@@ -11338,14 +11338,39 @@ var App = function (_React$Component3) {
     value: function render() {
       return React.createElement(
         'div',
-        null,
-        React.createElement('input', { type: 'text', onChange: this.handleChange.bind(this) }),
+        { className: 'ui middle aligned center aligned grid' },
         React.createElement(
-          'button',
-          { onClick: this.search.bind(this) },
-          ' search '
-        ),
-        React.createElement(History, { ref: this.setHistory.bind(this) })
+          'div',
+          { className: 'fourteen wide column' },
+          React.createElement(
+            'h2',
+            { className: 'ui teal image header' },
+            React.createElement('i', { className: 'hand spock icon' }),
+            React.createElement(
+              'div',
+              { className: 'content' },
+              'Search for food'
+            )
+          ),
+          React.createElement(
+            'div',
+            { className: 'ui action input' },
+            React.createElement('input', { type: 'text',
+              onChange: this.handleChange.bind(this) }),
+            React.createElement(
+              'button',
+              { className: 'ui blue button',
+                onClick: this.search.bind(this) },
+              'search'
+            )
+          ),
+          React.createElement(
+            'div',
+            { className: 'ui horizontal divider' },
+            'Places'
+          ),
+          React.createElement(History, { ref: this.setHistory.bind(this) })
+        )
       );
     }
   }]);
