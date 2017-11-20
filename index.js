@@ -10,6 +10,8 @@ let historyCollection;
 // Connect to the db
 const mongoURL = 'mongodb://brown:123456@ds111496.mlab.com:11496/js-class-20171116'
 MongoClient.connect(mongoURL, async function(err, db) {
+    console.log('mongodb connect');
+  
     if (err) {
       return console.dir(err); 
     } 
@@ -39,11 +41,12 @@ MongoClient.connect(mongoURL, async function(err, db) {
     //   console.log(results)
     // });
 
-    historyCollection = db.collection('history');    
-
-
-    mdb = db;
+    mdb = db;    
+    historyCollection = db.collection('history');  
+    runApp();  
 });
+
+async function runApp(){
 
 const app = express()
 // parse application/x-www-form-urlencoded
@@ -83,3 +86,5 @@ app.get('/api/history', function(req, res){
 app.listen(port, function () {
   console.log(`Example app listening on port ${port}!`)
 })
+
+};
