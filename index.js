@@ -74,7 +74,10 @@ app.get('/api/search', async function (req, res) {
 })
 
 app.get('/api/history', function(req, res){
-  res.json(queryHistory);
+  historyCollection.find({}).toArray((error, results) =>{
+    res.json(results);
+  });
+  //res.json(queryHistory);
 })
 
 app.listen(port, function () {
