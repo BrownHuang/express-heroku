@@ -6,6 +6,7 @@ const path = require('path')
 const MongoClient = require('mongodb').MongoClient;
 
 let mdb;
+let historyCollection;
 // Connect to the db
 const mongoURL = 'mongodb://brown:123456@ds111496.mlab.com:11496/js-class-20171116'
 MongoClient.connect(mongoURL, async function(err, db) {
@@ -33,10 +34,12 @@ MongoClient.connect(mongoURL, async function(err, db) {
     // console.log(item); 
 
     //--讀取所有DB資料--//
-    let collection = db.collection('test');
-    collection.find({}).toArray((err, results) => {
-      console.log(results)
-    });
+    // let collection = db.collection('test');
+    // collection.find({}).toArray((err, results) => {
+    //   console.log(results)
+    // });
+
+    historyCollection = db.collection('history');    
 
 
     mdb = db;
@@ -63,6 +66,7 @@ app.get('/api/search', async function (req, res) {
   if(address){
     let result = await search(address);
     queryHistory.push(result);
+    historyCollection.insert(result);
     res.json(result);
   }else{
     res.json({error: 'Address is empty'});
