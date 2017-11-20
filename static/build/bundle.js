@@ -11265,7 +11265,7 @@ var History = function (_React$Component2) {
       //console.log('[render]',this.state);
 
       return this.state.data.map(function (item, index) {
-        return React.createElement(HistoryItem, { item: item, index: index });
+        return React.createElement(HistoryItem, { item: item, key: index });
       });
     }
   }]);

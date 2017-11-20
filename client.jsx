@@ -51,7 +51,7 @@ class History extends React.Component {
     //console.log('[render]',this.state);
 
     return this.state.data.map((item, index) => {
-      return <HistoryItem item={item} index={index}/>
+      return <HistoryItem item={item} key={index}/>
     }) 
 
   }
