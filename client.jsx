@@ -86,27 +86,27 @@ class App extends React.Component{
   render(){
     return (
       <div className="ui middle aligned center aligned grid">
-        <div className="fourteen wide column">
-          <h2 className="ui teal image header">
-            <i className="hand spock icon"></i>
-            <div className="content">
-              Search for food
-            </div>
-          </h2>
-          <div className="ui action input">
-            <input type="text"
-              onChange={this.handleChange.bind(this)} />
-            <button className="ui blue button"
-              onClick={this.search.bind(this)}>
-              search
-            </button>
+      <div className="fourteen wide column">
+        <h2 className="ui teal image header">
+          <i className="hand spock icon"></i>
+          <div className="content">
+            Search for food
           </div>
-          <div className="ui horizontal divider">
-            Places  
-          </div>
-          <History ref={this.setHistory.bind(this)} />
+        </h2>
+        <div className="ui action input">
+          <input type="text"
+            onChange={this.handleChange.bind(this)} />
+          <button className="ui blue button"
+            onClick={this.search.bind(this)}>
+            search
+          </button>
         </div>
+        <div className="ui horizontal divider">
+          Places  
+        </div>
+        <History ref={this.setHistory.bind(this)} />
       </div>
+    </div>
     )
   }
 
